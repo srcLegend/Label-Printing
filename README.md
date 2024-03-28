@@ -22,19 +22,19 @@ The Label Printing project is a Python-based solution designed to automate the g
 
 1. Clone the repository:
 ```sh
-   git clone https://github.com/srcLegend/Label-Printing.git
+git clone https://github.com/srcLegend/Label-Printing.git
 ```
 2. Navigate to the project directory and install the required Python libraries:
 ```sh
-   cd Label-Printing
-   pip install -r requirements.txt
+cd Label-Printing
+pip install -r requirements.txt
 ```
 
 ### Usage
 
 1. Update the `Labels.csv` and `Samples.csv` files with your box and sample data, respectively.
 2. Run the script:
- ```sh
-   python main.py
+```sh
+python main.py
 ```
 3. Follow any on-screen prompts to confirm label details or handle edge cases.
