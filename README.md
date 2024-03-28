@@ -35,6 +35,6 @@ pip install -r requirements.txt
 1. Update the `Labels.csv` and `Samples.csv` files with your box and sample data, respectively.
 2. Run the script:
 ```sh
-python main.py
+python label_printing.py
 ```
 3. Follow any on-screen prompts to confirm label details or handle edge cases.
