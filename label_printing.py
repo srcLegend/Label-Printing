@@ -54,10 +54,10 @@ class Tag:
 		self.__ending_depth__ = float(kwargs['ending_depth'])
 
 	def __repr__(self) -> str:
-		return f'{self.hole}-{self.name} | {self.starting_depth:.2f} m - {self.ending_depth:.2f} m'
+		return str(self)
 
 	def __str__(self) -> str:
-		return f'{self.hole}-{self.name}'
+		return f'{self.hole}-{self.name} ({self.starting_depth:.2f} m - {self.ending_depth:.2f} m)'
 
 	def __lt__(self, other: Self):
 		return self.starting_depth < other.starting_depth
