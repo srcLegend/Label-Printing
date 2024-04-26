@@ -14,7 +14,7 @@ The Label Printing project is a Python-based solution designed to automate the g
 
 ### Prerequisites
 
-- Python 3.8 or newer, tested on 3.12
+- Built and tested on Python 3.12
 - LaTeX installed on your system
 - Required Python libraries: `tkinter`, `natsort`, `qrcode`
 
