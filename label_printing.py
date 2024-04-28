@@ -13,13 +13,6 @@ from qrcode.main import GenericImage
 #endregion
 
 #region Constants
-# Make sure keys match structure order: 'https://learn.microsoft.com/en-us/windows/win32/printdocs/printer-info-2#Syntax'
-PRINTER_INFO_2_ENUM = ['pServerName', 'pPrinterName', 'pShareName', 'pPortName', 'pDriverName', 'pComment',
-					   'pLocation', 'pDevMode', 'pSepFile', 'pPrintProcessor', 'pDatatype', 'pParameters',
-					   'pSecurityDescriptor', 'Attributes', 'Priority', 'DefaultPriority', 'StartTime',
-					   'UntilTime', 'Status', 'cJobs', 'AveragePPM']
-CJI = PRINTER_INFO_2_ENUM.index('cJobs')
-"""Current job index."""
 TAG_DELIMITER = '|'
 """Delimiter character for multiple skipped/forced tags."""
 #endregion
