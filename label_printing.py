@@ -227,13 +227,14 @@ class Printer:
 
 		run(f'{self.command} "{filepath}"', check=False)  # noqa: S603 (Trusted command)
 
-	def __init__(self, label_size: str) -> None:
+	def __init__(self, name: str, label_size: str) -> None:
 		"""
 		Initialize a new instance of the `Printer` class, configuring it based on the specified label size.
 
 		This setup includes determining the appropriate paper size and constructing the command used for printing
 
 		### Parameters
+		- name: `str` -- Name of the printer to be used as a label writer.
 		- label_size: `str` -- The size of the label to be printed. Supported values are 'small' and 'large'.
 
 		### Raises
@@ -251,7 +252,7 @@ class Printer:
 				message = "Unsupported paper type!"
 				raise ValueError(message)
 
-		self.__name__ = "DYMO LabelWriter 450"
+		self.__name__ = name
 		self.__command__ = f'"{executable}" -print-to "{self.name}" -print-settings "noscale,paper={paper}" -silent -exit-when-done'
 
 	@property
@@ -265,7 +266,8 @@ class Printer:
 		return self.__command__
 
 
-def generate_latex(imagepath: Path | str, qrcode_data: str) -> Path:
+# TODO: Better formatting when no tags
+def generate_latex(imagepath: Path | str, qrcode_data: str, *, tags_enabled: bool = False) -> Path:
 	"""
 	Generate a LaTeX document from a given image path and QR code data, tailored to a specified label size.
 
@@ -358,16 +360,16 @@ def generate_latex(imagepath: Path | str, qrcode_data: str) -> Path:
 
 if __name__ == "__main__":
 	# small (30252): 28*89 mm² | large (30323): 59*102 mm²
-	label_size = "small"
-	printer = Printer(label_size)
+	label_size="small"
+	printer = Printer("DYMO LabelWriter 450", label_size=label_size)
 
-	labels_datapath = Path(r"examples\Labels.csv")
 	tags_datapath = Path(r"examples\Samples.csv")
+	labels_datapath = Path(r"examples\Labels.csv")
 	printed_datapath = labels_datapath.with_name("Printed Labels.json")
 
 	label_keys = {
-		"hole": "Hole",
-		"box": "Box",
+		"hole": "Hole ID",
+		"box": "Box ID",
 		"box_start": "From",
 		"box_stop": "To",
 		"tag_position": "Tag Position",
@@ -447,7 +449,7 @@ if __name__ == "__main__":
 
 		with NamedTemporaryFile("wb", suffix=".png", delete=False) as pngfile:
 			qrcode_image.save(pngfile)
-			texpath = generate_latex(pngfile.name, qrcode_data)
+			texpath = generate_latex(pngfile.name, qrcode_data, tags_enabled=tags_enabled)
 
 			command = f'lualatex --interaction=nonstopmode --enable-write18 "{texpath.stem}"'
 			run(command, cwd=texpath.parent, check=True)  # noqa: S603 (Trusted command)

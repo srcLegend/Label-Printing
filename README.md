@@ -27,7 +27,7 @@ git clone https://github.com/srcLegend/Label-Printing.git
 2. Navigate to the project directory and install the required Python libraries:
 ```sh
 cd Label-Printing
-pip install -r requirements.txt
+pip install -U natsort,qrcode
 ```
 
 ### Usage
